@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.3.8",
+    "@radix-ui/react-popover": "^1.1.1",
+    "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
     "class-variance-authority": "^0.7.0",
