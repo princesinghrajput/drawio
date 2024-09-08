@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Archive, Flag, GithubIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,11 +9,11 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogFooter,
-  DialogClose
+  DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
-function SideNavBottom({onFileCreate}:any) {
+function SideNavBottom({ onFileCreate, totalFiles }: any) {
   const menuList = [
     {
       id: 1,
@@ -28,14 +28,19 @@ function SideNavBottom({onFileCreate}:any) {
       path: "",
     },
     {
-      id: 2,
+      id: 3,
       name: "Archive",
       icon: Archive,
       path: "",
     },
   ];
 
-  const [fileInput, setFileInput] = useState('')
+  const [fileInput, setFileInput] = useState("");
+
+  // Calculate the progress percentage
+  const maxFiles = 5;
+  const progressPercentage = Math.min((totalFiles / maxFiles) * 100, 100);
+
   return (
     <div>
       {menuList.map((menu, index) => {
@@ -50,47 +55,53 @@ function SideNavBottom({onFileCreate}:any) {
       })}
 
       {/* Add New File Button */}
-
       <Dialog>
         <DialogTrigger asChild>
           <Button className="w-full bg-blue-600 hover:bg-blue-800 justify-start mt-3">
-            {" "} New File
+            {" "}
+            New File
           </Button>
         </DialogTrigger>
         <DialogContent className="bg-white text-slate-800">
           <DialogHeader>
             <DialogTitle>Create New File</DialogTitle>
             <DialogDescription>
-              <Input placeholder="Enter File Name " onChange={(e)=>setFileInput(e.target.value)} className="mt-3"/>
+              <Input
+                placeholder="Enter File Name "
+                onChange={(e) => setFileInput(e.target.value)}
+                className="mt-3"
+              />
             </DialogDescription>
           </DialogHeader>
 
           <DialogFooter className="">
-          <DialogClose asChild>
-            <Button type="button"
-            disabled={!(fileInput.length > 3 && fileInput)}
-            onClick={()=>onFileCreate(fileInput)}
-            className="bg-blue-600 hover:bg-blue-700" >
-              Create
-            </Button>
-          </DialogClose>
-        </DialogFooter>
+            <DialogClose asChild>
+              <Button
+                type="button"
+                disabled={!(fileInput.length > 3 && fileInput)}
+                onClick={() => onFileCreate(fileInput)}
+                className="bg-blue-600 hover:bg-blue-700"
+              >
+                Create
+              </Button>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 
       {/* Progress Bar */}
-
       <div className="h-4 w-full bg-gray-300 rounded-xl mt-5">
-        <div className="h-4 w-[40%] bg-blue-600 rounded-lg"></div>
+        <div
+          className="h-4 bg-blue-600 rounded-lg"
+          style={{ width: `${progressPercentage}%` }}
+        ></div>
       </div>
 
-      <h2 className="text-[12px] mt-3 ">
+      <h2 className="text-[12px] mt-3">
         {" "}
-        <strong>1</strong> Out of <strong>5</strong> files used
+        <strong>{totalFiles}</strong> Out of <strong>{maxFiles}</strong> files used
       </h2>
-      <h2 className="text-[12px] mt-1">
-        Upgrade your plan for unlimited access.
-      </h2>
+      <h2 className="text-[12px] mt-1">Upgrade your plan for unlimited access.</h2>
     </div>
   );
 }
