@@ -38,7 +38,7 @@ function SideNavBottom({ onFileCreate, totalFiles }: any) {
   const [fileInput, setFileInput] = useState("");
 
   // Calculate the progress percentage
-  const maxFiles = 5;
+  const maxFiles = 10;
   const progressPercentage = Math.min((totalFiles / maxFiles) * 100, 100);
 
   return (
