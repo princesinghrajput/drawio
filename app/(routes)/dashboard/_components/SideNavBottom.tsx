@@ -1,8 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import { Archive, Flag, GithubIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
-function SideNavBottom() {
+function SideNavBottom({onFileCreate}:any) {
   const menuList = [
     {
       id: 1,
@@ -23,6 +34,8 @@ function SideNavBottom() {
       path: "",
     },
   ];
+
+  const [fileInput, setFileInput] = useState('')
   return (
     <div>
       {menuList.map((menu, index) => {
@@ -37,9 +50,33 @@ function SideNavBottom() {
       })}
 
       {/* Add New File Button */}
-      <Button className="w-full bg-blue-600 hover:bg-blue-800 justify-start mt-3">
-        New File
-      </Button>
+
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className="w-full bg-blue-600 hover:bg-blue-800 justify-start mt-3">
+            {" "} New File
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="bg-white text-slate-800">
+          <DialogHeader>
+            <DialogTitle>Create New File</DialogTitle>
+            <DialogDescription>
+              <Input placeholder="Enter File Name " onChange={(e)=>setFileInput(e.target.value)} className="mt-3"/>
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter className="">
+          <DialogClose asChild>
+            <Button type="button"
+            disabled={!(fileInput.length > 3 && fileInput)}
+            onClick={()=>onFileCreate(fileInput)}
+            className="bg-blue-600 hover:bg-blue-700" >
+              Create
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Progress Bar */}
 
@@ -47,8 +84,13 @@ function SideNavBottom() {
         <div className="h-4 w-[40%] bg-blue-600 rounded-lg"></div>
       </div>
 
-      <h2 className="text-[12px] mt-3 "> <strong>1</strong> Out of  <strong>5</strong> files used</h2>
-      <h2 className="text-[12px] mt-1">Upgrade your plan for unlimited access.</h2>
+      <h2 className="text-[12px] mt-3 ">
+        {" "}
+        <strong>1</strong> Out of <strong>5</strong> files used
+      </h2>
+      <h2 className="text-[12px] mt-1">
+        Upgrade your plan for unlimited access.
+      </h2>
     </div>
   );
 }
