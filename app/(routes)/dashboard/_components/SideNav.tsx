@@ -25,7 +25,8 @@ function SideNav() {
       // Add your code here to navigate to file creation page.
       createFile({
         fileName: fileName,
-        teamId: activeTeam?._id,
+        teamId: activeTeam?._id as string , 
+
         createdBy: user?.email,
         archive:false,
         document:'',
