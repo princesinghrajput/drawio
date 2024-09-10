@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import Header from '@editorjs/header';
 import List from "@editorjs/list";
@@ -8,8 +8,31 @@ import LinkTool from '@editorjs/link';
 import Checklist from '@editorjs/checklist';
 import Table from '@editorjs/table'
 
-
+const rawDocument={
+  "time" : 1550476186479,
+    "blocks" : [{
+      data:{
+        text:'Document Name',
+        level: 2
+      },
+      id:"123",
+      type:"header"
+    },
+    {
+      data:{
+       
+        level: 4
+      },
+      id:"12345",
+      type:"header"
+    }
+  ],
+    "version" : "2.8.1"
+}
 function Editor() {
+  const ref = useRef<EditorJS>();
+  const [document, setDocument] = useState(rawDocument);
+
   useEffect(() => {
     initEditor();
   }, []);
@@ -24,7 +47,7 @@ function Editor() {
             shortcut: 'CMD+SHIFT+H',
 
             config: {
-              placeholder: 'Enter a header',
+              placeholder: 'Enter a Header',
               levels: [2, 3, 4],
               defaultLevel: 3
             }
@@ -59,7 +82,10 @@ function Editor() {
           },
       },
       holder: "editorjs",
+      data:document,
+
     });
+    ref.current = editor;
   };
   return <div>
     <div id="editorjs" className="ml-20"></div>
