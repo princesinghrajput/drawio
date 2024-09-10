@@ -34,7 +34,9 @@ function Workspace({params}:any) {
             </div>
             <div className='bg-red-400 h-screen'>
                 {/* WhiteBoard/Canvas */}
-              <Canvas/>
+              <Canvas
+              onSaveTrigger={triggerSave} fileId={params.fileId} fileData={fileData}
+              />
             </div>
         </div>
     </div>
