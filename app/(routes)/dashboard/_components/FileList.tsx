@@ -17,6 +17,7 @@ import {
 import { useRouter } from "next/navigation";
 
 export interface FILE {
+  [x: string]: OutputData | undefined;
   archive: boolean;
   createdAt: string;
   editedAt: string;

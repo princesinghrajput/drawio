@@ -10,6 +10,7 @@ import Table from '@editorjs/table'
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
+import { FILE } from "../../dashboard/_components/FileList";
 
 const rawDocument={
   "time" : 1550476186479,
@@ -32,14 +33,15 @@ const rawDocument={
   ],
     "version" : "2.8.1"
 }
-function Editor({onSaveTrigger, fileId}:any) {
+function Editor({onSaveTrigger, fileId, fileData}:{onSaveTrigger:any, fileId:any, fileData:FILE}) {
+ console.log("Fuck", fileData)
   const updateDocument = useMutation(api.files.updateDocument)
   const ref = useRef<EditorJS>();
-  const [document, setDocument] = useState(rawDocument);
+  // const [document, setDocument] = useState(rawDocument);
 
   useEffect(() => {
-    initEditor();
-  }, []);
+    fileData&&initEditor();
+  }, [fileData]);
 
   useEffect(()=>{
     console.log("Triggered editor", onSaveTrigger);
@@ -92,7 +94,7 @@ function Editor({onSaveTrigger, fileId}:any) {
           },
       },
       holder: "editorjs",
-      data:document,
+      data:fileData ? JSON.parse(fileData?.document) :rawDocument,
 
     });
     ref.current = editor;
