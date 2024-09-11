@@ -12,6 +12,8 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import Constant from "@/app/_constant/Constant";
+import PricingDialog from "./PricingDialog";
 
 function SideNavBottom({ onFileCreate, totalFiles }: any) {
   const menuList = [
@@ -38,7 +40,7 @@ function SideNavBottom({ onFileCreate, totalFiles }: any) {
   const [fileInput, setFileInput] = useState("");
 
   // Calculate the progress percentage
-  const maxFiles = 10;
+  const maxFiles =Constant.MAX_FREE_FILE;
   const progressPercentage = Math.min((totalFiles / maxFiles) * 100, 100);
 
   return (
@@ -62,6 +64,7 @@ function SideNavBottom({ onFileCreate, totalFiles }: any) {
             New File
           </Button>
         </DialogTrigger>
+        {totalFiles<maxFiles ?
         <DialogContent className="bg-white text-slate-800">
           <DialogHeader>
             <DialogTitle>Create New File</DialogTitle>
@@ -86,7 +89,7 @@ function SideNavBottom({ onFileCreate, totalFiles }: any) {
               </Button>
             </DialogClose>
           </DialogFooter>
-        </DialogContent>
+        </DialogContent> :<PricingDialog/>}
       </Dialog>
 
       {/* Progress Bar */}
