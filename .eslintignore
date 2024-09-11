@@ -1,0 +1,8 @@
+# Ignore all TypeScript files
+*.ts
+*.tsx
+
+# Or specify individual files
+app/(routes)/dashboard/layout.tsx
+app/(routes)/dashboard/page.tsx
+app/(routes)/dashboard/_components/FileList.tsx

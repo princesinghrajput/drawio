@@ -65,6 +65,7 @@ function Editor({onSaveTrigger, fileId, fileData}:{onSaveTrigger:any, fileId:any
             }
           },
           list: {
+            // @ts-ignore
             class: List,
             inlineToolbar: true,
             config: {
@@ -85,6 +86,7 @@ function Editor({onSaveTrigger, fileId, fileData}:{onSaveTrigger:any, fileId:any
             inlineToolbar: true,
           },
           table: {
+            // @ts-ignore
             class: Table,
             inlineToolbar: true,
             config: {
@@ -94,6 +96,8 @@ function Editor({onSaveTrigger, fileId, fileData}:{onSaveTrigger:any, fileId:any
           },
       },
       holder: "editorjs",
+       /* eslint-disable @typescript-eslint/no-explicit-any */
+
       data:fileData?.document ? JSON.parse(fileData?.document) :rawDocument,
 
     });

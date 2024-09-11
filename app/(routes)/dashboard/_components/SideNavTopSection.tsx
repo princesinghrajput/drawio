@@ -22,9 +22,9 @@ import { Button } from "@/components/ui/button";
 
 
 export interface TEAM{
-    createdBy:String,
-    teamName:String,
-    _id:String
+    createdBy:string,
+    teamName:string,
+    _id:string
 
 }
 function SideNavTopSection({ user, setActiveTeamInfo }:any ) {
